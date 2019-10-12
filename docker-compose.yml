@@ -1,0 +1,13 @@
+# Docker-compose to use for local testing 
+# DON'T USE IT AT PRODUCTION!!!!!
+version: '3.1'
+
+services:
+  mongo-express:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: superadmin
+      MONGO_INITDB_ROOT_PASSWORD: qwerty123
