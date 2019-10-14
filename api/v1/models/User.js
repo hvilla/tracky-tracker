@@ -1,26 +1,29 @@
-'use strict'// Cargamos el módulo de mongoose
+/*
+    MODEL: USER.
+    CONTAINS DEFAULT SCHEMA STRUCTURE FOR USER MODEL
+*/
 
+'use strict'
 
-var mongoose =  require('mongoose');// Usaremos los esquemas
+var mongoose =  require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
-var Schema = mongoose.Schema;// Creamos el objeto del esquema y sus atributos
+var Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
 var UserSchema = Schema({
-    first_name: {type:String,required: [true, 'Please put your first name']},
-    last_name: {type:String,required: [true, 'Please put your last name']},
-    email: {type:String,unique:[true,'The email submitted exists'],required: [true, 'Please put a valid email']},
-    password: {type:String}
+    first_name: {type:String,required: [true, 'Please put your first name']}, //FIRST NAME OF THE USER (REQUIRED)
+    last_name: {type:String,required: [true, 'Please put your last name']}, //LAST NAME OF THE USER (REQUIRED)
+    email: {type:String,unique:[true,'The email submitted exists'],required: [true, 'Please put a valid email']},  //NEEDS AN EMAIL, CAN'T REPEAT EMAIL
+    password: {type:String}  //PASSWORD OF THE USER
 });
 
 UserSchema.pre('save', function(next) {
     var user = this;
 
-    // generate a salt
+    //USER SCHEMA HOOK BEFORE SAVE, THAT GENERATES AN ENCRYPTED PASSWORD USING BCRYPTJS
     bcrypt.genSalt(Number(process.env.PASSWORD_SALT_FACTOR), function(err, salt) {
         if (err) return next(err);
 
-        // hash the password using our new salt
         bcrypt.hash(user.password, Number(process.env.PASSWORD_SALT_FACTOR), function(err, hash) {
             if (err) return next(err);
 
@@ -33,4 +36,4 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', UserSchema); // Exportamos el modelo para usarlo en otros ficheros
+module.exports = mongoose.model('User', UserSchema);

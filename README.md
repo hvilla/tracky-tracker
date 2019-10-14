@@ -54,7 +54,9 @@ PASSWORD_SALT_FACTOR=10
 
 **Note:** Default PASSWORD_SALT_FACTOR por bcryptjs generator is 10.
 
-### Tests
+## Tests
+
+### Tests with Mocha And Chai
 If you need to run default tests you can use the command
 
 ```
@@ -62,6 +64,13 @@ $ yarn dev
 ```
 
 **Note**: It will run default tests.
+
+### Tests with Postman
+
+If you need to run default tests with postman, in the folder postman you can import all the requests used.
+
+
+**Note**: For downloads https://www.getpostman.com/downloads/, for linux you can use snap for install it.
 
 ## Author
 

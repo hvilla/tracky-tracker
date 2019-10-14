@@ -13,9 +13,9 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 
 
-app.use('/api/v1/user/',UserRoutes);
-app.use('/api/v1/project/',ProjectRoutes);
-app.use('/api/v1/task/',TaskRoutes);
+app.use('/api/v1/user/',UserRoutes); //ROUTE TO USER ROUTES
+app.use('/api/v1/project/',ProjectRoutes); //ROUTE TO PROJECT ROUTES
+app.use('/api/v1/task/',TaskRoutes);//ROUTE TO TASK ROUTES
 
 
 

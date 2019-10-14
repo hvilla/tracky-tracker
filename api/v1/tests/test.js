@@ -5,8 +5,8 @@ chai.use(chaiHttp);
 let should = chai.should();
 var assert = chai.assert;
 
-var randomNames = require('random-name');
-var randomEmail = require('random-email');
+var randomNames = require('random-name'); //USED TO GENERATE RANDOM NAMES
+var randomEmail = require('random-email'); //USED TO GENERATE RANDOM EMAILS
 
 const apiUrl = 'http://localhost:9000/api/v1';
 
