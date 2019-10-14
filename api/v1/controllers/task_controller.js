@@ -1,12 +1,20 @@
 import TaskService from '../services/task_service';
 import ApiResponses from '../utils/ApiResponses';
 
+const moment = require('moment');
 const response = new ApiResponses();
 
 class TaskController{
     static async createTask(req,res){
-        const data = req.body;
+        let data = req.body;
         try{
+            if(data.duration!=undefined){
+                if(data.duration.split(':').length===3){
+                    data.duration = (Number(data.duration.split(':')[0])*60*60) + (Number(data.duration.split(':')[1])*60) + Number(data.duration.split(':')[2]);
+                }else if(!Number(data.duration)){
+                    throw 'Please submit duration in seconds or HH:mm:ss format';
+                }
+            }
             const newTask = await TaskService.createTask(data);
             return response.successCreated(newTask,res);
         }catch(error){
@@ -73,6 +81,15 @@ class TaskController{
             });
             return response.successOK({list:listTask,totalTasksProject:totalDuration},res);
         }catch(error){
+            return response.errorBadRequest(error,res);
+        }
+    }
+
+    static async listAllTasks(req,res){
+        try {
+            const listTask = await TaskService.getAllTasks();
+            return response.successOK(listTask,res);
+        } catch (error) {
             return response.errorBadRequest(error,res);
         }
     }

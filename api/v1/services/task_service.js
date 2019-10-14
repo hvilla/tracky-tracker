@@ -52,7 +52,7 @@ class TaskService{
 
     static async getAllTasks(){
         try{
-            const listOfTasks = Task.find();
+            const listOfTasks = Task.find().sort({owner: 'desc',project:'asc'});
             listOfTasks instanceof mongoose.Query;
             return listOfTasks;
         } catch (error) {

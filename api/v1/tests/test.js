@@ -205,8 +205,32 @@ describe('Task Tests', async function() {
 
   it('should show all the TASKs of the USER created (4 Tasks)',async function(){
     let res = await chai.request(apiUrl).get(`/task/user/${userCreated._id}`);
-    //console.log("\tResponse list: ",res.body)
-    assert.equal(res.body.length,5);
+    console.log("\tResponse list: ",res.body)
+    assert.equal(res.body.list.length,5);
+  });
+
+  it('should show all the TASKs of the USER by PROJECT ascending',async function(){
+    let res = await chai.request(apiUrl).get(`/task/project/${projectCreated._id}?order=asc`);
+    console.log("\tResponse list: ",res.body)
+    res.should.have.status(200);
+  });
+
+  it('should show all the TASKs of the USER by PROJECT descending',async function(){
+    let res = await chai.request(apiUrl).get(`/task/project/${projectCreated._id}?order=desc`);
+    console.log("\tResponse list: ",res.body)
+    res.should.have.status(200);
+  });
+
+  it('should show all the TASKs of the USER ascending',async function(){
+    let res = await chai.request(apiUrl).get(`/task/user/${userCreated._id}?order=asc`);
+    console.log("\tResponse list: ",res.body)
+    res.should.have.status(200);
+  });
+
+  it('should show all the TASKs of the USER descending',async function(){
+    let res = await chai.request(apiUrl).get(`/task/user/${userCreated._id}?order=desc`);
+    console.log("\tResponse list: ",res.body)
+    res.should.have.status(200);
   });
 
 
