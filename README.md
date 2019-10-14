@@ -29,8 +29,6 @@ $ yarn dev
 ### Running with installed DB
 
 ```
-$ ruby blocks.rb '(([{({[[{]})}]})])])}])'
-WRONG SEQUENCE!
 ```
 
 ## Authors
