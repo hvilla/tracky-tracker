@@ -7,7 +7,7 @@
     "dev": "nodemon --exec babel-node ./api/index.js",
     "test": "mocha  --require @babel/register ./api/v1/tests/test.js --exit"
   },
-  "author": "HRVP",
+  "author": "HVP",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.6.3",
