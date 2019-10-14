@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 class UserService{
     static async addUser(data){
         try {
-           await User.create(data);
+           return await User.create(data);
         } catch (error) {
             throw error;
         }

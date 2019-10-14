@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 class ProjectService{
     static async createProject(data){
         try {
-            await Project.create(data);
+            return await Project.create(data);
         } catch (error) {
             throw error;
         }

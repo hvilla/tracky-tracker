@@ -7,4 +7,5 @@ router.post('/',TaskController.createTask);
 router.get('/:id',TaskController.getTaskById);
 router.get('/project/:id',TaskController.listTasksByProject);
 router.get('/user/:id',TaskController.listTasksByUser);
+router.put('/toggle/:id',TaskController.toggleTask);
 export default router;

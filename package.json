@@ -4,11 +4,13 @@
   "description": "For Qrvey tests",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./api/index.js"
+    "dev": "nodemon --exec babel-node ./api/index.js",
+    "test": "mocha  --require @babel/register ./api/v1/tests/test.js --exit"
   },
   "author": "HRVP",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -16,13 +18,23 @@
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "mongoose": "^5.7.4",
+    "mongoose-id-validator": "^0.5.3",
     "mongoose-unique-validator": "^2.0.3",
+    "saslprep": "^1.0.3",
     "yarn": "^1.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.3"
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.1",
+    "mocha-tags": "^1.0.1",
+    "nodemon": "^1.19.3",
+    "random-email": "^1.0.3",
+    "random-name": "^0.1.2"
   }
 }

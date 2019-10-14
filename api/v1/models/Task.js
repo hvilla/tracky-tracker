@@ -1,6 +1,6 @@
 'use strict'
 var mongoose =  require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+const idValidator = require('mongoose-id-validator');
 
 var Schema = mongoose.Schema;
 var TaskSchema = Schema({
@@ -9,7 +9,7 @@ var TaskSchema = Schema({
     last_start: {type:Date,default:Date.now},
     paused: {type:Date,default:null},
     createdAt: {type:Date,default:Date.now},
-    status: {type:Boolean,default:true}, //TWO STATES true = Running, false = Stopped, 
+    status: {type:Boolean,default:false}, //TWO STATES true = Running, false = Stopped, 
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -20,5 +20,7 @@ var TaskSchema = Schema({
         default: null
     } //CAN HAVE A PROJECT OR NOT
 });
+
+TaskSchema.plugin(idValidator);
 
 module.exports = mongoose.model('Task', TaskSchema);

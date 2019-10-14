@@ -7,10 +7,15 @@ class UserController{
     static async createUser(req,res){
         const data = req.body;
         try{
-            await UserService.addUser(data);
-            return response.successCreated(`${data.first_name} ${data.last_name}`,res);
+            let newUser = await UserService.addUser(data);
+            let jsonResponse = {
+                _id:newUser._id,
+                first_name:newUser.first_name,
+                last_name:newUser.last_name,
+                email:newUser.email
+            }
+            return response.successCreated(jsonResponse,res);
         }catch(error){
-            console.log("Anda",error)
             return response.errorBadRequest(error,res);
         }
     }
@@ -18,10 +23,12 @@ class UserController{
     static async getUserById(req,res){
         try{
             const { id } = req.params;
-            const listUser = await UserService.getUserBydId(id);
-            return response.successOK(listUser,res);
+            const theUser = await UserService.getUserBydId(id);
+            if(!theUser){
+                return response.errorNotFound(`User (id=${id}) doesn't exists`,res);
+            }
+            return response.successOK(theUser,res);
         }catch(error){
-            console.log(error)
             return response.errorBadRequest(error,res);
         }
     }
@@ -31,7 +38,6 @@ class UserController{
             const listUser = await UserService.getAllUsers();
             return response.successOK(listUser,res);
         }catch(error){
-            console.log(error)
             return response.errorBadRequest(error,res);
         }
     }

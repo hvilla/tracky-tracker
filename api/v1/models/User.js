@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 var UserSchema = Schema({
     first_name: {type:String,required: [true, 'Please put your first name']},
     last_name: {type:String,required: [true, 'Please put your last name']},
-    email: {type:String,unique:true,required: [true, 'Please put a valid email']},
+    email: {type:String,unique:[true,'The email submitted exists'],required: [true, 'Please put a valid email']},
     password: {type:String}
 });
 

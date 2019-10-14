@@ -8,9 +8,8 @@ class TaskController{
         const data = req.body;
         try{
             const newTask = await TaskService.createTask(data);
-            return response.successCreated({id:newTask.id,project:newTask.project,owner:newTask.owner,status:newTask.status,started:newTask.last_start},res);
+            return response.successCreated(newTask,res);
         }catch(error){
-            console.log(error);
             return response.errorBadRequest(error,res);
         }
     }
@@ -25,11 +24,11 @@ class TaskController{
         }
     }
 
-    static async pauseTask(req,res){
-        const data = req.body;
+    static async toggleTask(req,res){
+        const { id }= req.params;
         try{
-            await TaskService.addTask(data);
-            return response.successCreated(`${data.first_name} ${data.last_name}`,res);
+            const taskPaused = await TaskService.toggleTask(id);
+            return response.successUpdated(taskPaused,res);
         }catch(error){
             return response.errorBadRequest(error,res);
         }
@@ -39,6 +38,9 @@ class TaskController{
         try{
             const { id } = req.params;
             const listTask = await TaskService.getTaskById(id);
+            if(!listTask){
+                return response.errorNotFound(`Task (id=${id}) doesn't exists`,res);
+            }
             return response.successOK(listTask,res);
         }catch(error){
             return response.errorBadRequest(error,res);
@@ -48,20 +50,29 @@ class TaskController{
     static async listTasksByUser(req,res){
         try{
             const { id } = req.params;
-            const listTask = await TaskService.getAllTasksByUser(id);
-            return response.successOK(listTask,res);
+            const { order } = req.query;
+            const listTask = await TaskService.getAllTasksByUser(id,order);
+            let totalDuration = 0;
+            listTask.map(task => {
+                totalDuration+=task.duration;
+            });
+            return response.successOK({list:listTask,totalTasksUser:totalDuration},res);
         }catch(error){
-            console.log(error)
             return response.errorBadRequest(error,res);
         }
     }
 
     static async listTasksByProject(req,res){
         try{
-            const listTask = await TaskService.getAllTasks();
-            return response.successOK(listTask,res);
+            const { id } = req.params;
+            const { order } = req.query;
+            const listTask = await TaskService.getAllTasksByProject(id,order);
+            let totalDuration = 0;
+            listTask.map(task => {
+                totalDuration+=task.duration;
+            });
+            return response.successOK({list:listTask,totalTasksProject:totalDuration},res);
         }catch(error){
-            console.log(error)
             return response.errorBadRequest(error,res);
         }
     }

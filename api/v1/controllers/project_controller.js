@@ -6,8 +6,8 @@ class ProjectController{
     static async createProject(req,res){
         const data = req.body;
         try{
-            await ProjectService.createProject(data);
-            return response.successCreated(`${data.name}`,res);
+            const project = await ProjectService.createProject(data);
+            return response.successCreated(project,res);
         }catch(error){
             return response.errorBadRequest(error,res);
         }
