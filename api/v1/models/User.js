@@ -4,7 +4,7 @@
 var mongoose =  require('mongoose');// Usaremos los esquemas
 var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;// Creamos el objeto del esquema y sus atributos
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 var UserSchema = Schema({
     first_name: {type:String,required: [true, 'Please put your first name']},
