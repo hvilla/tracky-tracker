@@ -60,7 +60,7 @@ PASSWORD_SALT_FACTOR=10
 If you need to run default tests you can use the command
 
 ```
-$ yarn dev
+$ yarn test
 ```
 
 **Note**: It will run default tests.
