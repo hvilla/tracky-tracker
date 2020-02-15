@@ -21,7 +21,7 @@
     "mongoose-id-validator": "^0.5.3",
     "mongoose-unique-validator": "^2.0.3",
     "saslprep": "^1.0.3",
-    "yarn": "^1.19.1"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
